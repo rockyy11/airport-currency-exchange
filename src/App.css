@@ -1,32 +1,124 @@
-.App {
+.headerImage {
+  width: 100%;
+  height: 120px;
+}
+
+.logoImage {
+  width: 50px;
+}
+
+.rootStyle {
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background: url('/header-bg.png');
+  width: 100%;
+  display: inline-block;
+  padding-top: 20px;
+}
+
+.headerRight {
+  float: right;
+}
+
+.headerRight ul {
+  position: relative;
+  top: -10px;
+  padding-right: 40px;
+}
+
+.headerRight li {
+  display: inline-block;
+  list-style-type: none;
+  padding-right: 5px;
+}
+
+.headerRight li a {
+  color: #000;
+  z-index: 999;
+}
+
+.headerRight li a:hover {
+  text-decoration: none;
+}
+
+.headerLeft {
+  font-size: 25px;
+  width: 70%;
+  float: left;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.bttn {
+  color: #FF0072;
+  text-decoration: none;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s ease all;
+}
+.bttn:hover {
+  color: #FFF;
+}
+.bttn:focus {
+  color: #FFF;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.bttn {
+  display: inline-block;
+  text-align: center;
+  width: 75px;
+  padding: 7px 0px;
+  position: relative;
+}
+.bttn:before {
+  -webkit-transition: 0.5s all ease;
+  transition: 0.5s all ease;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  bottom: 50%;
+  right: 0;
+  opacity: 0;
+  content: '';
+  background-color: #000;
+  z-index: -2;
+}
+.bttn:hover:before {
+  -webkit-transition: 0.5s all ease;
+  transition: 0.5s all ease;
+  top: 0;
+  bottom: 0;
+  opacity: 1;
+}
+.bttn:focus:before {
+  transition: 0.5s all ease;
+  top: 0;
+  bottom: 0;
+  opacity: 1;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+}
+.select {
+  border-bottom: 2px solid
 }
 
-.App-link {
-  color: #61dafb;
+.paperRootStyle {
+  width: 50%;
+  margin-top: 100px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dialogBodyPadding {
+  padding: 5px;
+}
+
+.hrRow {
+  border-style: groove;
+}
+
+.dialogButton {
+  background-color: yellow !important;
 }
