@@ -1,7 +1,8 @@
-import * as React from 'react'
+import React from 'react'
 import Header from './layouts/Header'
 import Footer from './layouts/Footer'
 import Routes from './Routes'
+import UpdateRates from './utils/UpdateRates'
 import './App.css'
 
 class App extends React.Component {
@@ -15,5 +16,7 @@ class App extends React.Component {
     )
   }
 }
+
+UpdateRates()
 
 export default App
