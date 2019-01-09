@@ -20,6 +20,18 @@ class DisplaySettings extends React.Component {
     this.props.updateSettings(this.state);
   }
 
+  isFieldsInvalid() {
+    const {
+      currenciesRatesRefreshTime,
+      commission,
+      surcharge,
+      minimalCommission,
+      rateMargin
+    } = this.state
+    return !(currenciesRatesRefreshTime && commission && surcharge
+      && minimalCommission && rateMargin)
+  }
+
   render() {
     const {
       currenciesRatesRefreshTime,
@@ -36,62 +48,63 @@ class DisplaySettings extends React.Component {
         </div>
         <div className={'row'}>
           <div className={'col-md-8 dialogBodyPadding'}>
-            Refresh currency exchange rates at every (seconds)
+            Refresh currency exchange rates at every (seconds)*
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
               onChange={this.onFieldChange('currenciesRatesRefreshTime')}
-              defaultValue={currenciesRatesRefreshTime} />
+              defaultValue={currenciesRatesRefreshTime || 0} />
           </div>
         </div>
         <div className={'row'}>
           <div className={'col-md-8 dialogBodyPadding'}>
-            Commission (%)
+            Commission* (%)
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
               onChange={this.onFieldChange('commission')}
-              defaultValue={commission} />
+              defaultValue={commission || 0} />
           </div>
         </div>
         <div className={'row'}>
           <div className={'col-md-8 dialogBodyPadding'}>
-            Surcharge ($)
+            Surcharge* ($)
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
               onChange={this.onFieldChange('surcharge')}
-              defaultValue={surcharge} />
+              defaultValue={surcharge || 0} />
           </div>
         </div>
         <div className={'row'}>
           <div className={'col-md-8 dialogBodyPadding'}>
-            Minimal commission ($)
+            Minimal commission* ($)
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
               onChange={this.onFieldChange('minimalCommission')}
-              defaultValue={minimalCommission} />
+              defaultValue={minimalCommission || 0} />
           </div>
         </div>
         <div className={'row'}>
           <div className={'col-md-8 dialogBodyPadding'}>
-            Buy/sell rate margin (%)
+            Buy/sell rate margin* (%)
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
               onChange={this.onFieldChange('rateMargin')}
-              defaultValue={rateMargin} />
+              defaultValue={rateMargin || 0} />
           </div>
         </div>
         <Button
           onClick={this.updateSettings}
           className={'dialogButton'}
+          disabled={this.isFieldsInvalid()}
           style={{ float: 'right' }}>
           Update
         </Button>
