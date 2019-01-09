@@ -1,2 +1,3 @@
-export { getCurrenciesListSaga } from './currency/GetCurrenciesList';
-export { getAdminSettingsSaga } from './admin/GetAdminSettings';
+export { getCurrenciesListSaga } from './currency/GetCurrenciesList'
+export { getSettingsSaga } from './admin/GetSettings'
+export { getUpdateSettingsSaga } from './admin/UpdateSettings'

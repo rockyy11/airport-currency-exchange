@@ -1,5 +1,5 @@
 const adminConfiguration = {
-  // Currency Rate Refresh Time in seconds 
+  // Currency Rate Refresh Time in seconds
   currenciesRatesRefreshTime: 10,
   // commission in percentage
   commission: 2,
@@ -9,6 +9,6 @@ const adminConfiguration = {
   minimalCommission: 1,
   // Buy/Sell rate margin in percentage
   rateMargin: 2
-};
+}
 
-export default adminConfiguration;
+export default adminConfiguration

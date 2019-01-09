@@ -1,11 +1,13 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import React from 'react'
+import { connect } from 'react-redux'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import { updateAdminSettingsRequest } from '../../actions/admin/updateSettings'
 
 class DisplaySettings extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { ...props.settings };
+    super(props)
+    this.state = { ...props.settings }
   }
 
   onFieldChange = (name) => (event) => {
@@ -15,11 +17,17 @@ class DisplaySettings extends React.Component {
   }
 
   updateSettings = () => {
-    // this.props.updateSettings(this.state);
+    this.props.updateSettings(this.state);
   }
 
   render() {
-    const { currenciesRatesRefreshTime, commission, surcharge, minimalCommission, rateMargin } = this.state;
+    const {
+      currenciesRatesRefreshTime,
+      commission,
+      surcharge,
+      minimalCommission,
+      rateMargin
+    } = this.state
 
     return (
       <div className={'container'} style={{ width: '45%' }}>
@@ -33,7 +41,7 @@ class DisplaySettings extends React.Component {
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
-              onChange={this.onFieldChange('name')}
+              onChange={this.onFieldChange('currenciesRatesRefreshTime')}
               defaultValue={currenciesRatesRefreshTime} />
           </div>
         </div>
@@ -42,7 +50,10 @@ class DisplaySettings extends React.Component {
             Commission (%)
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
-            <TextField type='number' defaultValue={commission} />
+            <TextField
+              type='number'
+              onChange={this.onFieldChange('commission')}
+              defaultValue={commission} />
           </div>
         </div>
         <div className={'row'}>
@@ -50,7 +61,10 @@ class DisplaySettings extends React.Component {
             Surcharge ($)
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
-            <TextField type='number' defaultValue={surcharge} />
+            <TextField
+              type='number'
+              onChange={this.onFieldChange('surcharge')}
+              defaultValue={surcharge} />
           </div>
         </div>
         <div className={'row'}>
@@ -58,7 +72,10 @@ class DisplaySettings extends React.Component {
             Minimal commission ($)
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
-            <TextField type='number' defaultValue={minimalCommission} />
+            <TextField
+              type='number'
+              onChange={this.onFieldChange('minimalCommission')}
+              defaultValue={minimalCommission} />
           </div>
         </div>
         <div className={'row'}>
@@ -66,7 +83,10 @@ class DisplaySettings extends React.Component {
             Buy/sell rate margin (%)
           </div>
           <div className={'col-md-4 dialogBodyPadding'}>
-            <TextField type='number' defaultValue={rateMargin} />
+            <TextField
+              type='number'
+              onChange={this.onFieldChange('rateMargin')}
+              defaultValue={rateMargin} />
           </div>
         </div>
         <Button
@@ -76,8 +96,12 @@ class DisplaySettings extends React.Component {
           Update
         </Button>
       </div>
-    );
+    )
   }
 }
 
-export default DisplaySettings;
+const mapDispatchToProps = (dispatch) => ({
+  updateSettings: (settings) => dispatch(updateAdminSettingsRequest(settings))
+})
+
+export default connect(null, mapDispatchToProps)(DisplaySettings)

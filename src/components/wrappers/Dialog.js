@@ -7,7 +7,7 @@ import InputBase from '@material-ui/core/InputBase'
 import Button from '@material-ui/core/Button'
 
 class DialogWrapper extends React.Component {
-  render() {
+  render () {
     return (
       <Dialog open={this.props.open} onClose={this.props.onClose}>
         <DialogTitle>{this.props.dialogType} EUR</DialogTitle>

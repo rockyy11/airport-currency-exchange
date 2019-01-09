@@ -7,7 +7,6 @@ import currencyAPIHelper from '../../services/Currency'
 function * startGetCurrenciesListSagaFlow () {
   try {
     const currenciesList = yield currencyAPIHelper.getCurrenciesList()
-    /* tslint:disable:no-unsafe-any */
     yield put(currenciesListSuccess({ response: currenciesList }))
   } catch (err) {
     yield put(currenciesListFailure({ msg: err }))

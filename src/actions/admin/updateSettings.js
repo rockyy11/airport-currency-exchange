@@ -1,15 +1,11 @@
-import { createAction } from 'redux-actions';
+import { createAction } from 'redux-actions'
 
 import {
   UPDATE_ADMIN_SETTINGS_REQUEST,
-  UPDATE_ADMIN_SETTINGS_SUCCESS,
   UPDATE_ADMIN_SETTINGS_FAILURE
 } from '../ActionTypes'
 
-export const updateAdminSettingsRequest = createAction(UPDATE_ADMIN_SETTINGS_REQUEST)
-
-export const updateAdminSettingsSuccess = createAction(
-  UPDATE_ADMIN_SETTINGS_SUCCESS,
+export const updateAdminSettingsRequest = createAction(UPDATE_ADMIN_SETTINGS_REQUEST,
   (payload) => payload
 )
 

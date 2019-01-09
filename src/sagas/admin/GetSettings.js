@@ -7,7 +7,6 @@ import adminAPIHelper from '../../services/Admin'
 function * startGetSettingsFlow () {
   try {
     const adminSettings = yield adminAPIHelper.getAdminSettings()
-    /* tslint:disable:no-unsafe-any */
     yield put(adminSettingsSuccess({ response: adminSettings }))
   } catch (err) {
     yield put(adminSettingsFailure({ msg: err }))

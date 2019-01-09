@@ -20,8 +20,9 @@ class AdminContainer extends React.Component {
 
   componentDidMount () {
     const { settingsStates, getAdminSettings } = this.props
-    console.log(settingsStates)
-    getAdminSettings()
+    if (_.isEmpty(settingsStates.settings)) {
+      getAdminSettings()
+    }
   }
 }
 

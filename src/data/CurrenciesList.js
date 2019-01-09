@@ -3,6 +3,6 @@ const currenciesList = {
   EUR: { amount: 1000 },
   CAD: { amount: 800 },
   baseCurrency: 'USD'
-};
+}
 
-export default currenciesList;
+export default currenciesList
