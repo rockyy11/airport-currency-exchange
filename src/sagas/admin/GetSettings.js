@@ -4,7 +4,7 @@ import { ADMIN_SETTINGS_REQUEST } from '../../actions/ActionTypes'
 import { adminSettingsSuccess, adminSettingsFailure } from '../../actions/admin/settings'
 import adminAPIHelper from '../../services/Admin'
 
-function * startGetAdminSettingsFlow () {
+function * startGetSettingsFlow () {
   try {
     const adminSettings = yield adminAPIHelper.getAdminSettings()
     /* tslint:disable:no-unsafe-any */
@@ -14,6 +14,6 @@ function * startGetAdminSettingsFlow () {
   }
 }
 
-export function * getAdminSettingsSaga () {
-  yield takeLatest(ADMIN_SETTINGS_REQUEST, startGetAdminSettingsFlow)
+export function * getSettingsSaga () {
+  yield takeLatest(ADMIN_SETTINGS_REQUEST, startGetSettingsFlow)
 }
