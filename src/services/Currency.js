@@ -2,21 +2,33 @@ import CurrenciesListData from '../data/CurrenciesList'
 import Helper from './Helper'
 
 const currencyAPIHelper = {
-  async getCurrenciesList () {
+  async getCurrenciesList (oldCurrenciesList) {
+    console.log(process.env.DB_USER)
     const baseCurrency = CurrenciesListData.baseCurrency
-    const filteredKey = Object.keys(CurrenciesListData).filter((key) => {
+    const filteredKeys = Object.keys(CurrenciesListData).filter((key) => {
       if (key !== baseCurrency && key !== 'baseCurrency') {
         return key
       }
     })
-    const currencies = filteredKey.join(',')
+    const currencies = filteredKeys.join(',')
     const [response, err] = await Helper.fetchRates(currencies)
     if (err) {
       console.error('Error while fetching the new currencies rates')
       // TODO: throw  error
     }
-    filteredKey.forEach((key) => {
-      CurrenciesListData[key].rates = response.quotes[`${baseCurrency}${key}`]
+    filteredKeys.forEach((key) => {
+      let newRate = response.quotes[`${baseCurrency}${key}`]
+      if (!oldCurrenciesList) {
+        CurrenciesListData[key].rate = newRate
+        CurrenciesListData[key].actualRate = newRate
+      } else {
+        if (newRate === oldCurrenciesList[key].actualRate) {
+          newRate = oldCurrenciesList[key].rate + (oldCurrenciesList[key].rate * 0.01)
+        } else {
+          CurrenciesListData[key].actualRate = newRate
+        }
+        CurrenciesListData[key].rate = newRate
+      }
     })
     return CurrenciesListData
   }
