@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { buyCurrencyRequest } from '../../actions/currency/BuyCurrency'
 import { sellCurrencyRequest } from '../../actions/currency/SellCurrency'
+import Helper from '../helper'
 
 class DialogWrapper extends React.Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class DialogWrapper extends React.Component {
   getTotal() {
     const { subTotal, commission } = this.state
     const total = subTotal + commission
-    return total.toFixed(4)
+    return Helper.fixAmount(total)
   }
 
   onFieldChange = (event) => {
@@ -117,13 +118,13 @@ class DialogWrapper extends React.Component {
               Subtotal
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              {subTotal.toFixed(4)}
+              {Helper.fixAmount(subTotal)}
             </div>
             <div className={'col-md-9 dialogBodyPadding'}>
               Commision
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              {commission.toFixed(2)}
+              {Helper.fixRate(commission)}
             </div>
           </div>
           <hr className={'hrRow'} />

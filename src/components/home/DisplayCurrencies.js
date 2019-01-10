@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import Table from '@material-ui/core/Table'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
@@ -7,6 +6,7 @@ import TableRow from '@material-ui/core/TableRow'
 import TableBody from '@material-ui/core/TableBody'
 import Paper from '@material-ui/core/Paper'
 import DisplayCurrencyDetails from './DisplayCurrencyDetails'
+import Helper from '../helper'
 
 class DisplayCurrencies extends React.Component {
   displayCurrencyDetails () {
@@ -19,8 +19,8 @@ class DisplayCurrencies extends React.Component {
           <DisplayCurrencyDetails
             key={key}
             currency={key}
-            buy={currenciesList[key].rate.toFixed(2)}
-            sell={currenciesList[key].rate.toFixed(2)}
+            buy={Helper.fixRate(currenciesList[key].rate)}
+            sell={Helper.fixRate(currenciesList[key].rate)}
             amount={currenciesList[key].amount}
           />
         ))

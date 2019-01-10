@@ -49,7 +49,7 @@ class DisplayCurrencyDetails extends React.Component {
           <TableCell
             align='right'
             className={helper.isLessAmount(currency, amount) ? 'warning' : ''}>
-            {amount.toFixed(2)}
+            {helper.fixAmount(amount)}
           </TableCell>
         </TableRow>
       </React.Fragment>
