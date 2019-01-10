@@ -42,12 +42,12 @@ class DialogWrapper extends React.Component {
 
   updateAmount = () => {
     const { dialogType, currency, buyCurrency, sellCurrency } = this.props
-    const { commission, subTotal } = this.state
+    const { commission, subTotal, inputAmount } = this.state
     const total = commission + subTotal
     if (dialogType === 'Buy') {
-      buyCurrency({ type: currency, amount: total })
+      buyCurrency({ type: currency, totalAmount: total, buy: inputAmount })
     } else {
-      sellCurrency({ type: currency, amount: total })
+      sellCurrency({ type: currency, totalAmount: total, sell: inputAmount })
     }
   }
 

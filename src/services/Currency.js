@@ -34,27 +34,27 @@ const currencyAPIHelper = {
     return CurrenciesListData
   },
   async buyCurrency (data, currenciesList) {
-    const { type, amount: buyAmount } = data
+    const { type, totalAmount, buy } = data
     const baseCurrency = currenciesList.baseCurrency
     if (type === currenciesList.baseCurrency) {
       throw new Error('You can\'t buy base currency!!')
     }
-    const remainingBaseAmount = currenciesList[baseCurrency].amount - buyAmount
+    const remainingBaseAmount = currenciesList[baseCurrency].amount - totalAmount
     if (remainingBaseAmount < 0) {
       throw new Error('You don\'t have enough balance to buy the amount!!')
     }
     currenciesList[baseCurrency].amount = remainingBaseAmount
-    currenciesList[type].amount = currenciesList[type].amount + buyAmount
+    currenciesList[type].amount = currenciesList[type].amount + buy
     return currenciesList
   },
   async sellCurrency (data, currenciesList) {
-    const { type, amount: sellAmount } = data
+    const { type, totalAmount, sell } = data
     const baseCurrency = currenciesList.baseCurrency
     if (type === currenciesList.baseCurrency) {
       throw new Error('You can\'t sell base currency!!')
     }
-    currenciesList[baseCurrency].amount = currenciesList[baseCurrency].amount + sellAmount
-    currenciesList[type].amount = currenciesList[type].amount - sellAmount
+    currenciesList[baseCurrency].amount = currenciesList[baseCurrency].amount + sell
+    currenciesList[type].amount = currenciesList[type].amount - totalAmount
     if (currenciesList[type].amount < 0) {
       throw new Error('You don\'t have enough balance to sell the amount!!')
     }
