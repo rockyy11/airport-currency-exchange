@@ -11,6 +11,7 @@ function * startGetNewCurrenciesSagaFlow () {
     console.log('********Updated Rates*************', currenciesList)
     yield put(currenciesListSuccess({ response: currenciesList }))
   } catch (err) {
+    console.error('****Failed GetNewCurrenciesSagaFlow*****', err)
     yield put(currenciesListFailure({ msg: err }))
   }
 }

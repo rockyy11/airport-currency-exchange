@@ -9,6 +9,7 @@ function * startGetCurrenciesListSagaFlow () {
     const currenciesList = yield currencyAPIHelper.getCurrenciesList()
     yield put(currenciesListSuccess({ response: currenciesList }))
   } catch (err) {
+    console.error('****Failed GetCurrenciesListSagaFlow*****', err)
     yield put(currenciesListFailure({ msg: err }))
   }
 }

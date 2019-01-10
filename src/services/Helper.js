@@ -20,7 +20,7 @@ const Helper = {
       response = [data]
     } catch (err) {
       response = [undefined, err]
-      console.error('Error fetching the new currencies rates')
+      console.error('Error API fetching the new currencies rates', err)
     }
     return response
   }

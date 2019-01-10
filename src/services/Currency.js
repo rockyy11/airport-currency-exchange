@@ -14,7 +14,7 @@ const currencyAPIHelper = {
     const currencies = filteredKeys.join(',')
     const [response, err] = await Helper.fetchRates(currencies)
     if (err) {
-      console.error('Error while fetching the new currencies rates')
+      console.error('Error while fetching the new currencies rates', err)
       // TODO: throw  error
     }
     filteredKeys.forEach((key) => {

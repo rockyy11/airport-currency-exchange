@@ -9,6 +9,7 @@ function * startGetSettingsFlow () {
     const adminSettings = yield adminAPIHelper.getAdminSettings()
     yield put(adminSettingsSuccess({ response: adminSettings }))
   } catch (err) {
+    console.error('****Failed GetSettingsSagaFlow*****', err)
     yield put(adminSettingsFailure({ msg: err }))
   }
 }

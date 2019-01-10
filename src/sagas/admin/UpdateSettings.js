@@ -11,6 +11,7 @@ function * startUpdateSettingsFlow (data) {
     yield put(adminSettingsSuccess({ response: adminSettings }))
     yield put(updateAdminSettingsSuccess())
   } catch (err) {
+    console.error('****Failed UpdateSettingsFlow*****', err)
     yield put(updateAdminSettingsFailure({ msg: err }))
   }
 }
