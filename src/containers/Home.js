@@ -21,7 +21,7 @@ class HomeContainer extends React.Component {
         {
           !isPending && !_.isEmpty(currenciesList) &&
           <div>
-            <div className={'container'}>
+            <div className={'container headingStyles'}>
               Exchange rates shown as per 2018/08/23. You have {this.getBaseCurrency()} left.
             </div>
             <DisplayCurrencies

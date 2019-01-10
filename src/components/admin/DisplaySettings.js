@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import SettingIcon from '@material-ui/icons/Settings';
 import { updateAdminSettingsRequest } from '../../actions/admin/updateSettings'
 
 class DisplaySettings extends React.Component {
@@ -44,7 +45,10 @@ class DisplaySettings extends React.Component {
     return (
       <div className={'container'} style={{ width: '45%' }}>
         <div className={'row'}>
-          <div className={'col-md-12'}>Settings</div>
+          <div className={'col-md-12 settings'}>
+            <SettingIcon className={'seetingIcon'} />
+            Settings
+          </div>
         </div>
         <div className={'row'}>
           <div className={'col-md-8 dialogBodyPadding'}>
@@ -103,9 +107,8 @@ class DisplaySettings extends React.Component {
         </div>
         <Button
           onClick={this.updateSettings}
-          className={'dialogButton'}
-          disabled={this.isFieldsInvalid()}
-          style={{ float: 'right' }}>
+          className={'updateButton'}
+          disabled={this.isFieldsInvalid()}>
           Update
         </Button>
       </div>
