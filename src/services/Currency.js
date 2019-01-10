@@ -1,9 +1,16 @@
 import moment from 'moment'
-import CurrenciesListData from '../data/CurrenciesList'
+import _ from 'lodash'
+import ListData from '../data/CurrenciesList'
 import Helper from './Helper'
 
 const currencyAPIHelper = {
   async getCurrenciesList (oldCurrenciesList) {
+    let CurrenciesListData
+    if (_.isEmpty(oldCurrenciesList)) {
+      CurrenciesListData = _.cloneDeep(ListData)
+    } else {
+      CurrenciesListData = oldCurrenciesList
+    }
     const baseCurrency = CurrenciesListData.baseCurrency
     const filteredKeys = Object.keys(CurrenciesListData).filter((key) => {
       if (key !== baseCurrency && key !== 'baseCurrency' && key !== 'updatedRateTime') {
