@@ -8,13 +8,18 @@
 }
 
 .rootStyle {
-  height: 120px;
+  width: 100%;
+  display: inline-block;
+}
+
+.headerBg {
+  height: 119px;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  background: url('/header-bg.png');
   width: 100%;
   display: inline-block;
   padding-top: 20px;
+  background: url('/header-bg.png');
 }
 
 .headerRight {
@@ -124,7 +129,7 @@
 }
 
 .headingStyles {
-  width: 50%;
+  text-align: center;
   margin-top: 21px;
   font-weight: 600;
 }
@@ -157,4 +162,30 @@
 .warning {
   color: red !important;
   font-weight: 1000 !important;
+}
+
+.customDialog .MuiDialog-paperWidthSm-66 {
+  width: 550px;
+}
+
+.customIcon .MuiButtonBase-root-152.MuiIconButton-root-146 {
+  background: #bbb;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.customTh .MuiTableCell-head-46 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.customTd .MuiTableCell-root-45 {
+  font-size: 12px;
+  color: #333;
+}
+
+.baseCurrencyStyle {
+  padding-left: 3px;
+  padding-right: 3px;
 }

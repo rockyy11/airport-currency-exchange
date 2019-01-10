@@ -84,16 +84,11 @@ class DialogWrapper extends React.Component {
     const { open, onClose, dialogType, buyRate, sellRate, currency } = this.props
 
     return (
-      <Dialog open={open} onClose={onClose}>
+      <Dialog className={'customDialog'} open={open} onClose={onClose}>
         <DialogTitle>{dialogType} {currency}</DialogTitle>
         <div className={'container'} style={{ width: '100%' }}>
           <div className={'row'}>
-            <div className={'col-md-2'}>
-              <IconButton aria-label={'Menu'}>
-                <MenuIcon />
-              </IconButton>
-            </div>
-            <div className={'col-md-8'}>
+            <div className={'col-md-3'}>
               <TextField
                 defaultValue={inputAmount}
                 onChange={this.onFieldChange}
@@ -101,7 +96,7 @@ class DialogWrapper extends React.Component {
                 type='number'
               />
             </div>
-            <div className={'col-md-2'}>
+            <div className={'col-md-2 customIcon'}>
               <IconButton aria-label='Menu'>
                 .00
               </IconButton>
@@ -136,13 +131,13 @@ class DialogWrapper extends React.Component {
               {this.getTotal()}
             </div>
           </div>
-          <div className={'row'} style={{ padding: '12px' }}>
+          <div className={'row pull-right'} style={{ padding: '12px' }}>
             <div className={'col-md-4'}>
               <Button>
                 Cancel
               </Button>
             </div>
-            <div className={'col-md-8'} style={{ float: 'right' }}>
+            <div className={'col-md-4'} >
               <Button
                 className={'dialogButton'}
                 disabled={!inputAmount}
@@ -152,7 +147,7 @@ class DialogWrapper extends React.Component {
             </div>
           </div>
         </div>
-      </Dialog>
+      </Dialog >
     )
   }
 }

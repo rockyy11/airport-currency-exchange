@@ -10,8 +10,9 @@ const displayBaseCurrencyDetails = (props) => {
     <React.Fragment>
       Exchange rates shown as per
       <span> {currencyData.updatedRateTime}.</span>
-      You have &nbsp;
+      You have
       <span
+        style={{ 'paddingLeft': '3px', 'paddingRight': '3px' }}
         className={Helper.isLessAmount(baseCurrency, baseAmount) ? 'warning' : ''}>
         {Helper.fixAmount(baseAmount)} {baseCurrency}
       </span>

@@ -32,7 +32,7 @@ class DisplayCurrencies extends React.Component {
       <React.Fragment>
         <Paper className={'container paperRootStyle'}>
           <Table className={'currencyTableStyle'}>
-            <TableHead>
+            <TableHead className={'customTh'}>
               <TableRow>
                 <TableCell>Currency</TableCell>
                 <TableCell align='right'>Buy</TableCell>
@@ -40,7 +40,7 @@ class DisplayCurrencies extends React.Component {
                 <TableCell align='right'>Amount</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className={'customTd'}>
               {this.displayCurrencyDetails()}
             </TableBody>
           </Table>
