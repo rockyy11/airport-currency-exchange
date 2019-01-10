@@ -54,7 +54,7 @@ class DialogWrapper extends React.Component {
   getTotal() {
     const { subTotal, commission } = this.state
     const total = subTotal + commission
-    return total
+    return total.toFixed(4)
   }
 
   onFieldChange = (event) => {
@@ -115,13 +115,13 @@ class DialogWrapper extends React.Component {
               Subtotal
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              {subTotal}
+              {subTotal.toFixed(4)}
             </div>
             <div className={'col-md-9 dialogBodyPadding'}>
               Commision
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              {commission}
+              {commission.toFixed(2)}
             </div>
           </div>
           <hr className={'hrRow'} />
@@ -130,7 +130,7 @@ class DialogWrapper extends React.Component {
               Total
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              {subTotal + commission}
+              {this.getTotal()}
             </div>
           </div>
           <div className={'row'} style={{ padding: '12px' }}>
