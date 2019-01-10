@@ -25,17 +25,12 @@ const currencyAPIHelper = {
     }
     filteredKeys.forEach((key) => {
       let newRate = response.quotes[`${baseCurrency}${key}`]
-      if (!oldCurrenciesList) {
-        CurrenciesListData[key].rate = newRate
-        CurrenciesListData[key].actualRate = newRate
-      } else {
-        if (newRate === oldCurrenciesList[key].actualRate) {
-          newRate = oldCurrenciesList[key].rate + (oldCurrenciesList[key].rate * 0.01)
-        } else {
-          CurrenciesListData[key].actualRate = newRate
-        }
-        CurrenciesListData[key].rate = newRate
+      const actualRate = oldCurrenciesList && oldCurrenciesList[key].actualRate
+      if (newRate === actualRate) {
+        newRate = oldCurrenciesList[key].rate * 1.01
       }
+      CurrenciesListData[key].rate = newRate
+      CurrenciesListData[key].actualRate = newRate  
     })
     CurrenciesListData.updatedRateTime = moment().format('YYYY/MM/DD h:mm:ss')
     return CurrenciesListData

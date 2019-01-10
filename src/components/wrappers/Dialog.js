@@ -20,6 +20,8 @@ class DialogWrapper extends React.Component {
       commission: this.calculateCommision(props, 100),
       subTotal: this.getSubTotal(props, 100)
     }
+    this.isTypeBuy = this.isTypeBuy.bind(this)
+    this.rateToShow = this.rateToShow.bind(this)
   }
 
   calculateCommision(props, inputAmount) {
@@ -31,21 +33,15 @@ class DialogWrapper extends React.Component {
   }
 
   getSubTotal(props, inputAmount) {
-    const { dialogType, buyRate, sellRate } = props
-    let subTotal
-    if (dialogType === 'Buy') {
-      subTotal = inputAmount / buyRate
-    } else {
-      subTotal = inputAmount / sellRate
-    }
-    return subTotal
+    const { buyRate, sellRate } = props    
+    return inputAmount / (this.isTypeBuy() ? buyRate : sellRate)
   }
 
   updateAmount = () => {
-    const { dialogType, currency, buyCurrency, sellCurrency } = this.props
+    const { currency, buyCurrency, sellCurrency } = this.props
     const { commission, subTotal, inputAmount } = this.state
     const total = commission + subTotal
-    if (dialogType === 'Buy') {
+    if (this.isTypeBuy()) {
       buyCurrency({ type: currency, totalAmount: total, buy: inputAmount })
     } else {
       sellCurrency({ type: currency, totalAmount: total, sell: inputAmount })
@@ -54,8 +50,12 @@ class DialogWrapper extends React.Component {
 
   getTotal() {
     const { subTotal, commission } = this.state
-    const total = subTotal + commission
+    const total = this.isTypeBuy() ? subTotal + commission : subTotal - commission
     return Helper.fixAmount(total)
+  }
+
+  isTypeBuy() {
+    return this.props.dialogType === 'Buy'
   }
 
   onFieldChange = (event) => {
@@ -79,10 +79,14 @@ class DialogWrapper extends React.Component {
     }
   }
 
+  rateToShow() {
+    const rate = this.isTypeBuy() ? this.props.buyRate : this.props.sellRate
+    return (1 / rate).toFixed(4)
+  }
+
   render() {
     const { commission, inputAmount, subTotal } = this.state
     const { open, onClose, dialogType, buyRate, sellRate, currency } = this.props
-
     return (
       <Dialog className={'customDialog'} open={open} onClose={onClose}>
         <DialogTitle>{dialogType} {currency}</DialogTitle>
@@ -107,7 +111,7 @@ class DialogWrapper extends React.Component {
               Exchange rate
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              {dialogType === 'Buy' ? buyRate : sellRate}
+              {this.rateToShow()}
             </div>
             <div className={'col-md-9 dialogBodyPadding'}>
               Subtotal
@@ -133,7 +137,7 @@ class DialogWrapper extends React.Component {
           </div>
           <div className={'row pull-right'} style={{ padding: '12px' }}>
             <div className={'col-md-4'}>
-              <Button>
+              <Button onClick={onClose}>
                 Cancel
               </Button>
             </div>
