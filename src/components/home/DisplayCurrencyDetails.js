@@ -35,20 +35,22 @@ class DisplayCurrencyDetails extends React.Component {
           open={this.state.openDialog}
           onClose={this.closeDialog} />
         <TableRow hover={true} >
-          <TableCell>{currency}</TableCell>
+          <TableCell className={'tableRow'}>{currency}</TableCell>
           <TableCell
             align='right'
+            className={'tableRow'}
             onClick={this.onBuyCellClick}>
             {buy}
           </TableCell>
           <TableCell
             align='right'
+            className={'tableRow'}
             onClick={this.onSellCellClick}>
             {sell}
           </TableCell>
           <TableCell
             align='right'
-            className={helper.isLessAmount(currency, amount) ? 'warning' : ''}>
+            className={helper.isLessAmount(currency, amount) ? 'warning tableRow' : 'tableRow'}>
             {helper.fixAmount(amount)}
           </TableCell>
         </TableRow>
