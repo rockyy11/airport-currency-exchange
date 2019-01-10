@@ -4,7 +4,6 @@ import Helper from './Helper'
 
 const currencyAPIHelper = {
   async getCurrenciesList (oldCurrenciesList) {
-    console.log(process.env.DB_USER)
     const baseCurrency = CurrenciesListData.baseCurrency
     const filteredKeys = Object.keys(CurrenciesListData).filter((key) => {
       if (key !== baseCurrency && key !== 'baseCurrency' && key !== 'updatedRateTime') {
