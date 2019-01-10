@@ -14,11 +14,11 @@ class DisplayCurrencyDetails extends React.Component {
   }
 
   onBuyCellClick = () => {
-    this.setState({ openDialog: true, dialogType: 'BUY' });
+    this.setState({ openDialog: true, dialogType: 'Buy' });
   }
 
   onSellCellClick = () => {
-    this.setState({ openDialog: true, dialogType: 'SELL' });
+    this.setState({ openDialog: true, dialogType: 'Sell' });
   }
 
   render() {

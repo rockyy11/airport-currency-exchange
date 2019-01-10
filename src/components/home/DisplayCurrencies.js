@@ -11,11 +11,10 @@ import DisplayCurrencyDetails from './DisplayCurrencyDetails'
 class DisplayCurrencies extends React.Component {
   displayCurrencyDetails () {
     const { currenciesList, skip } = this.props
-    console.log('skip', skip)
 
     return (
       Object.keys(currenciesList)
-        .filter((key) => key !== skip && key !== 'baseCurrency')
+        .filter((key) => key !== skip && key !== 'baseCurrency' && key !== 'updatedRateTime')
         .map((key) => (
           <DisplayCurrencyDetails
             key={key}

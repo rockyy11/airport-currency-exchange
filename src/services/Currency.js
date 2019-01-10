@@ -1,3 +1,4 @@
+import moment from 'moment'
 import CurrenciesListData from '../data/CurrenciesList'
 import Helper from './Helper'
 
@@ -6,7 +7,7 @@ const currencyAPIHelper = {
     console.log(process.env.DB_USER)
     const baseCurrency = CurrenciesListData.baseCurrency
     const filteredKeys = Object.keys(CurrenciesListData).filter((key) => {
-      if (key !== baseCurrency && key !== 'baseCurrency') {
+      if (key !== baseCurrency && key !== 'baseCurrency' && key !== 'updatedRateTime') {
         return key
       }
     })
@@ -30,6 +31,7 @@ const currencyAPIHelper = {
         CurrenciesListData[key].rate = newRate
       }
     })
+    CurrenciesListData.updatedRateTime = moment().format('YYYY/MM/DD h:mm:ss')
     return CurrenciesListData
   }
 }

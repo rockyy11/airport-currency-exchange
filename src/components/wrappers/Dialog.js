@@ -3,7 +3,6 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
-import InputBase from '@material-ui/core/InputBase'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 

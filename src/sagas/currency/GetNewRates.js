@@ -1,5 +1,4 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
-
 import { FETCH_NEW_RATES_REQUEST } from '../../actions/ActionTypes'
 import { currenciesListSuccess, currenciesListFailure } from '../../actions/currency/CurrenciesList'
 import currencyAPIHelper from '../../services/Currency'
