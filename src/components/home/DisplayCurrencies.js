@@ -31,7 +31,7 @@ class DisplayCurrencies extends React.Component {
     return (
       <React.Fragment>
         <Paper className={'container paperRootStyle'}>
-          <Table>
+          <Table className={'currencyTableStyle'}>
             <TableHead>
               <TableRow>
                 <TableCell>Currency</TableCell>

@@ -149,3 +149,12 @@
   margin-top: 23px !important;
   margin-left: 15px !important;
 }
+
+.currencyTableStyle {
+  width: 100%;
+}
+
+.warning {
+  color: red !important;
+  font-weight: 1000 !important;
+}

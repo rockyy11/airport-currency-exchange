@@ -33,9 +33,9 @@ class DialogWrapper extends React.Component {
     const { dialogType, buyRate, sellRate } = props
     let subTotal
     if (dialogType === 'Buy') {
-      subTotal = buyRate * inputAmount
+      subTotal = inputAmount / buyRate
     } else {
-      subTotal = sellRate * inputAmount
+      subTotal = inputAmount / sellRate
     }
     return subTotal
   }
@@ -58,10 +58,12 @@ class DialogWrapper extends React.Component {
   }
 
   onFieldChange = (event) => {
-    const inputAmount = parseInt(event.target.value)
+    const val = parseInt(event.target.value)
+    const inputAmount = val || 0
+
     const commission = this.calculateCommision(this.props, inputAmount)
     this.setState({
-      inputAmount,
+      inputAmount: isNaN(inputAmount) ? 0 : inputAmount,
       commission,
       subTotal: this.getSubTotal(this.props, inputAmount)
     });

@@ -1,7 +1,8 @@
-import * as React from 'react';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import DialogWrapper from '../wrappers/Dialog';
+import * as React from 'react'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
+import DialogWrapper from '../wrappers/Dialog'
+import helper from '../helper'
 
 class DisplayCurrencyDetails extends React.Component {
   state = {
@@ -45,7 +46,11 @@ class DisplayCurrencyDetails extends React.Component {
             onClick={this.onSellCellClick}>
             {sell}
           </TableCell>
-          <TableCell align='right'>{amount.toFixed(2)}</TableCell>
+          <TableCell
+            align='right'
+            className={helper.isLessAmount(currency, amount) ? 'warning' : ''}>
+            {amount.toFixed(2)}
+          </TableCell>
         </TableRow>
       </React.Fragment>
     );
