@@ -32,6 +32,33 @@ const currencyAPIHelper = {
     })
     CurrenciesListData.updatedRateTime = moment().format('YYYY/MM/DD h:mm:ss')
     return CurrenciesListData
+  },
+  async buyCurrency (data, currenciesList) {
+    const { type, amount: buyAmount } = data
+    const baseCurrency = currenciesList.baseCurrency
+    if (type === currenciesList.baseCurrency) {
+      throw new Error('You can\'t buy base currency!!')
+    }
+    const remainingBaseAmount = currenciesList[baseCurrency].amount - buyAmount
+    if (remainingBaseAmount < 0) {
+      throw new Error('You don\'t have enough balance to buy the amount!!')
+    }
+    currenciesList[baseCurrency].amount = remainingBaseAmount
+    currenciesList[type].amount = currenciesList[type].amount + buyAmount
+    return currenciesList
+  },
+  async sellCurrency (data, currenciesList) {
+    const { type, amount: sellAmount } = data
+    const baseCurrency = currenciesList.baseCurrency
+    if (type === currenciesList.baseCurrency) {
+      throw new Error('You can\'t sell base currency!!')
+    }
+    currenciesList[baseCurrency].amount = currenciesList[baseCurrency].amount + sellAmount
+    currenciesList[type].amount = currenciesList[type].amount - sellAmount
+    if (currenciesList[type].amount < 0) {
+      throw new Error('You don\'t have enough balance to sell the amount!!')
+    }
+    return currenciesList
   }
 }
 
