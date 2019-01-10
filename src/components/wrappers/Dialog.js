@@ -67,6 +67,15 @@ class DialogWrapper extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps, nextStates) {
+    const { buyRate: newBuyRate, sellRate: newSellRate } = nextProps
+    const { buyRate: oldBuyRate, sellRate: oldSellRate } = this.props
+    if (oldBuyRate !== newBuyRate || oldSellRate !== newSellRate) {
+      const subTotal = this.getSubTotal(nextProps, this.state.inputAmount)
+      this.setState({ subTotal })
+    }
+  }
+
   render() {
     const { commission, inputAmount, subTotal } = this.state
     const { open, onClose, dialogType, buyRate, sellRate, currency } = this.props
