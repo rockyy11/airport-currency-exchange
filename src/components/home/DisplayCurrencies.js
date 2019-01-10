@@ -19,8 +19,8 @@ class DisplayCurrencies extends React.Component {
           <DisplayCurrencyDetails
             key={key}
             currency={key}
-            buy={'1.14'}
-            sell={'2.22'}
+            buy={currenciesList[key].rate.toFixed(2)}
+            sell={currenciesList[key].rate.toFixed(2)}
             amount={currenciesList[key].amount}
           />
         ))

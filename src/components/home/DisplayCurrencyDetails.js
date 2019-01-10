@@ -28,6 +28,9 @@ class DisplayCurrencyDetails extends React.Component {
       <React.Fragment>
         <DialogWrapper
           dialogType={this.state.dialogType}
+          buyRate={buy}
+          sellRate={sell}
+          currency={currency}
           open={this.state.openDialog}
           onClose={this.closeDialog} />
         <TableRow hover={true} >
@@ -42,7 +45,7 @@ class DisplayCurrencyDetails extends React.Component {
             onClick={this.onSellCellClick}>
             {sell}
           </TableCell>
-          <TableCell align='right'>{amount}</TableCell>
+          <TableCell align='right'>{amount.toFixed(2)}</TableCell>
         </TableRow>
       </React.Fragment>
     );

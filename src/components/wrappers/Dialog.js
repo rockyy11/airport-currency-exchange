@@ -1,16 +1,79 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import _ from 'lodash'
+import DefaultSettingsData from '../../data/AdminConfiguration'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import { buyCurrencyRequest } from '../../actions/currency/BuyCurrency'
+import { sellCurrencyRequest } from '../../actions/currency/SellCurrency'
 
 class DialogWrapper extends React.Component {
-  render () {
+  constructor(props) {
+    super(props)
+    this.state = {
+      inputAmount: 100,
+      commission: this.calculateCommision(props, 100),
+      subTotal: this.getSubTotal(props, 100)
+    }
+  }
+
+  calculateCommision(props, inputAmount) {
+    const { settings } = props.settingsStates
+    const configurationSettings = _.isEmpty(settings) ? DefaultSettingsData : settings
+    const { commission, surcharge, minimalCommission } = configurationSettings
+    const newCommission = Math.max((this.getSubTotal(props, inputAmount) * (commission / 100) + surcharge), minimalCommission)
+    return newCommission
+  }
+
+  getSubTotal(props, inputAmount) {
+    const { dialogType, buyRate, sellRate } = props
+    let subTotal
+    if (dialogType === 'Buy') {
+      subTotal = buyRate * inputAmount
+    } else {
+      subTotal = sellRate * inputAmount
+    }
+    return subTotal
+  }
+
+  updateAmount = () => {
+    const { dialogType, currency, buyCurrency, sellCurrency } = this.props
+    const { commission, subTotal } = this.state
+    const total = commission + subTotal
+    if (dialogType === 'Buy') {
+      buyCurrency({ type: currency, amount: total })
+    } else {
+      sellCurrency({ type: currency, amount: total })
+    }
+  }
+
+  getTotal() {
+    const { subTotal, commission } = this.state
+    const total = subTotal + commission
+    return total
+  }
+
+  onFieldChange = (event) => {
+    const inputAmount = parseInt(event.target.value)
+    const commission = this.calculateCommision(this.props, inputAmount)
+    this.setState({
+      inputAmount,
+      commission,
+      subTotal: this.getSubTotal(this.props, inputAmount)
+    });
+  }
+
+  render() {
+    const { commission, inputAmount, subTotal } = this.state
+    const { open, onClose, dialogType, buyRate, sellRate, currency } = this.props
+
     return (
-      <Dialog open={this.props.open} onClose={this.props.onClose}>
-        <DialogTitle>{this.props.dialogType} EUR</DialogTitle>
+      <Dialog open={open} onClose={onClose}>
+        <DialogTitle>{dialogType} {currency}</DialogTitle>
         <div className={'container'} style={{ width: '100%' }}>
           <div className={'row'}>
             <div className={'col-md-2'}>
@@ -20,8 +83,9 @@ class DialogWrapper extends React.Component {
             </div>
             <div className={'col-md-8'}>
               <TextField
-                defaultValue='EUR'
-                InputProps={{ inputProps: { min: 0 } }}
+                defaultValue={inputAmount}
+                onChange={this.onFieldChange}
+                InputProps={{ inputProps: { min: 1 } }}
                 type='number'
               />
             </div>
@@ -36,19 +100,19 @@ class DialogWrapper extends React.Component {
               Exchange rate
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              1.145
+              {dialogType === 'Buy' ? buyRate : sellRate}
             </div>
             <div className={'col-md-9 dialogBodyPadding'}>
               Subtotal
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              114.50
+              {subTotal}
             </div>
             <div className={'col-md-9 dialogBodyPadding'}>
               Commision
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              2.00
+              {commission}
             </div>
           </div>
           <hr className={'hrRow'} />
@@ -57,7 +121,7 @@ class DialogWrapper extends React.Component {
               Total
             </div>
             <div className={'col-md-3 dialogBodyPadding'}>
-              1.145
+              {subTotal + commission}
             </div>
           </div>
           <div className={'row'} style={{ padding: '12px' }}>
@@ -67,8 +131,11 @@ class DialogWrapper extends React.Component {
               </Button>
             </div>
             <div className={'col-md-8'} style={{ float: 'right' }}>
-              <Button className={'dialogButton'} >
-                Buy
+              <Button
+                className={'dialogButton'}
+                disabled={!inputAmount}
+                onClick={this.updateAmount}>
+                {dialogType}
               </Button>
             </div>
           </div>
@@ -78,4 +145,11 @@ class DialogWrapper extends React.Component {
   }
 }
 
-export default DialogWrapper
+const mapStateToProps = ({ settings }) => ({ settingsStates: settings })
+
+const mapDispatchToProps = (dispatch) => ({
+  buyCurrency: (data) => dispatch(buyCurrencyRequest(data)),
+  sellCurrency: (data) => dispatch(sellCurrencyRequest(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DialogWrapper)
