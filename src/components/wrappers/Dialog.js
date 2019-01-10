@@ -4,6 +4,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import InputBase from '@material-ui/core/InputBase'
+import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 class DialogWrapper extends React.Component {
@@ -19,7 +20,11 @@ class DialogWrapper extends React.Component {
               </IconButton>
             </div>
             <div className={'col-md-8'}>
-              <InputBase placeholder='EUR' />
+              <TextField
+                defaultValue='EUR'
+                InputProps={{ inputProps: { min: 0 } }}
+                type='number'
+              />
             </div>
             <div className={'col-md-2'}>
               <IconButton aria-label='Menu'>
@@ -56,17 +61,17 @@ class DialogWrapper extends React.Component {
               1.145
             </div>
           </div>
-        </div>
-        <div className={'row'} style={{ padding: '12px' }}>
-          <div className={'col-md-8'}>
-            <Button className={'dialogButton'} style={{ float: 'right' }}>
-              Buy
-            </Button>
-          </div>
-          <div className={'col-md-4'}>
-            <Button>
-              Cancel
-            </Button>
+          <div className={'row'} style={{ padding: '12px' }}>
+            <div className={'col-md-4'}>
+              <Button>
+                Cancel
+              </Button>
+            </div>
+            <div className={'col-md-8'} style={{ float: 'right' }}>
+              <Button className={'dialogButton'} >
+                Buy
+              </Button>
+            </div>
           </div>
         </div>
       </Dialog>

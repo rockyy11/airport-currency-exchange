@@ -57,6 +57,7 @@ class DisplaySettings extends React.Component {
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
+              InputProps={{ inputProps: { min: 10 } }}
               onChange={this.onFieldChange('currenciesRatesRefreshTime')}
               defaultValue={currenciesRatesRefreshTime || 0} />
           </div>
@@ -68,6 +69,7 @@ class DisplaySettings extends React.Component {
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
+              InputProps={{ inputProps: { min: 2 } }}
               onChange={this.onFieldChange('commission')}
               defaultValue={commission || 0} />
           </div>
@@ -79,6 +81,7 @@ class DisplaySettings extends React.Component {
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
+              InputProps={{ inputProps: { min: 1 } }}
               onChange={this.onFieldChange('surcharge')}
               defaultValue={surcharge || 0} />
           </div>
@@ -90,6 +93,7 @@ class DisplaySettings extends React.Component {
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
+              InputProps={{ inputProps: { min: 1 } }}
               onChange={this.onFieldChange('minimalCommission')}
               defaultValue={minimalCommission || 0} />
           </div>
@@ -101,6 +105,7 @@ class DisplaySettings extends React.Component {
           <div className={'col-md-4 dialogBodyPadding'}>
             <TextField
               type='number'
+              InputProps={{ inputProps: { min: 2 } }}
               onChange={this.onFieldChange('rateMargin')}
               defaultValue={rateMargin || 0} />
           </div>
