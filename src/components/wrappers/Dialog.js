@@ -88,12 +88,17 @@ class DialogWrapper extends React.Component {
     const { commission, inputAmount, subTotal } = this.state
     const { open, onClose, dialogType, buyRate, sellRate, currency } = this.props
     return (
-      <Dialog className={'customDialog'} open={open} onClose={onClose}>
+      <Dialog
+        className={'customDialog'}
+        PaperProps={{ classes: { root: 'dialogRootStyle' } }}
+        open={open}
+        onClose={onClose} >
         <DialogTitle>{dialogType} {currency}</DialogTitle>
         <div className={'container'} style={{ width: '100%' }}>
           <div className={'row'}>
             <div className={'col-md-3'}>
               <TextField
+                placeholder='Amount'
                 defaultValue={inputAmount}
                 onChange={this.onFieldChange}
                 InputProps={{ inputProps: { min: 1 } }}
