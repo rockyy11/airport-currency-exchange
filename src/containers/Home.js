@@ -8,13 +8,13 @@ import { currenciesListRequest } from '../actions/currency/CurrenciesList'
 
 class HomeContainer extends React.Component {
   render () {
-    const { settingsStates, currenciesListStates } = this.props
+    const { settingsStates, currenciesListStates, newRatesStates } = this.props
     const { currenciesList, isPending } = currenciesListStates
 
     return (
       <React.Fragment>
         {
-          !isPending && !_.isEmpty(currenciesList) &&
+          !isPending && !_.isEmpty(currenciesList) && !newRatesStates.error &&
           <div>
             <div className={'container headingStyles'}>
               <DisplayBaseCurrencyDetails currencyData={currenciesList} />
@@ -41,7 +41,8 @@ class HomeContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   currenciesListStates: state.currenciesList,
-  settingsStates: state.settings
+  settingsStates: state.settings,
+  newRatesStates: state.newRates
 })
 
 const mapDispatchToProps = (dispatch) => ({

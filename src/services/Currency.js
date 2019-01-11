@@ -25,8 +25,7 @@ const currencyAPIHelper = {
       throw err || 'Error fetching the API rates. Please try Again !!'
     }
     filteredKeys.forEach((key) => {
-      const apiRate = response && response.quotes[`${baseCurrency}${key}`]
-      let newRate = apiRate || oldCurrenciesList[key]
+      let newRate = response.quotes[`${baseCurrency}${key}`]
       const actualRate = oldCurrenciesList && oldCurrenciesList[key].actualRate
       if (newRate === actualRate) {
         newRate = oldCurrenciesList[key].rate * 1.01

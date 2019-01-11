@@ -15,12 +15,13 @@ const initializeStore = () => {
     const states = store.getState()
     const newCurrenciesList = states.currenciesList.currenciesList
     const newRefreshTime = states.settings.settings.currenciesRatesRefreshTime
-    if (!oldCurrenciesList && !_.isEmpty(newCurrenciesList)) {
+    const error = states.newRates.error
+    if (error) {
+      clearInterval(interval)
+    } else if (!oldCurrenciesList && !_.isEmpty(newCurrenciesList)) {
       oldCurrenciesList = newCurrenciesList
       interval = callInterval(defaultRefreshTime)
-    }
-
-    if (newRefreshTime && newRefreshTime !== defaultRefreshTime) {
+    } else if (newRefreshTime && newRefreshTime !== defaultRefreshTime) {
       defaultRefreshTime = newRefreshTime
       clearInterval(interval)
       interval = callInterval(defaultRefreshTime)
