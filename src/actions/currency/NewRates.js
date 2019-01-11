@@ -6,10 +6,7 @@ import {
   FETCH_NEW_RATES_FAILURE
 } from '../ActionTypes'
 
-export const fetchNewRatesRequest = createAction(
-  FETCH_NEW_RATES_REQUEST,
-  (payload) => payload
-)
+export const fetchNewRatesRequest = createAction(FETCH_NEW_RATES_REQUEST)
 
 export const fetchNewRatesSuccess = createAction(
   FETCH_NEW_RATES_SUCCESS,
