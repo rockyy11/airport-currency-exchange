@@ -1,6 +1,7 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { FETCH_NEW_RATES_REQUEST } from '../../actions/ActionTypes'
-import { currenciesListSuccess, currenciesListFailure } from '../../actions/currency/CurrenciesList'
+import { currenciesListSuccess } from '../../actions/currency/CurrenciesList'
+import { fetchNewRatesFailure } from '../../actions/currency/NewRates'
 import currencyAPIHelper from '../../services/Currency'
 
 function * startGetNewCurrenciesSagaFlow () {
@@ -12,7 +13,7 @@ function * startGetNewCurrenciesSagaFlow () {
     yield put(currenciesListSuccess({ response: currenciesList }))
   } catch (err) {
     console.error('****Failed GetNewCurrenciesSagaFlow*****', err)
-    yield put(currenciesListFailure({ msg: err }))
+    yield put(fetchNewRatesFailure({ msg: err }))
   }
 }
 

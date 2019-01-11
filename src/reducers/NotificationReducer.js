@@ -7,6 +7,7 @@ import {
   SELL_CURRENCY_FAILURE,
   SELL_CURRENCY_SUCCESS,
   BUY_CURRENCY_SUCCESS,
+  CURRENCIES_LIST_FAILURE,
   RESET_NOTIFICATION
 } from '../actions/ActionTypes'
 
@@ -17,7 +18,7 @@ const defaultState = {
 
 export default handleActions(
   {
-    [combineActions(UPDATE_ADMIN_SETTINGS_FAILURE, ADMIN_SETTINGS_FAILURE, BUY_CURRENCY_FAILURE, SELL_CURRENCY_FAILURE)]: (state, action) => {
+    [combineActions(UPDATE_ADMIN_SETTINGS_FAILURE, CURRENCIES_LIST_FAILURE, ADMIN_SETTINGS_FAILURE, BUY_CURRENCY_FAILURE, SELL_CURRENCY_FAILURE)]: (state, action) => {
       return {
         ...state,
         isError: true,

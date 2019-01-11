@@ -6,7 +6,8 @@ import Helper from './Helper'
 const currencyAPIHelper = {
   async getCurrenciesList (oldCurrenciesList) {
     let CurrenciesListData
-    if (_.isEmpty(oldCurrenciesList)) {
+    const isEmptyList = _.isEmpty(oldCurrenciesList)
+    if (isEmptyList) {
       CurrenciesListData = _.cloneDeep(ListData)
     } else {
       CurrenciesListData = oldCurrenciesList
@@ -19,18 +20,19 @@ const currencyAPIHelper = {
     })
     const currencies = filteredKeys.join(',')
     const [response, err] = await Helper.fetchRates(currencies)
-    if (err) {
+    if (err && isEmptyList) {
       console.error('Error while fetching the new currencies rates', err)
-      // TODO: throw  error
+      throw 'Error fetching the API rates. Please try Again !!'
     }
     filteredKeys.forEach((key) => {
-      let newRate = response.quotes[`${baseCurrency}${key}`]
+      const apiRate = response && response.quotes[`${baseCurrency}${key}`]
+      let newRate = apiRate || oldCurrenciesList[key]
       const actualRate = oldCurrenciesList && oldCurrenciesList[key].actualRate
       if (newRate === actualRate) {
         newRate = oldCurrenciesList[key].rate * 1.01
       }
       CurrenciesListData[key].rate = newRate
-      CurrenciesListData[key].actualRate = newRate  
+      CurrenciesListData[key].actualRate = newRate
     })
     CurrenciesListData.updatedRateTime = moment().format('YYYY/MM/DD h:mm:ss')
     return CurrenciesListData
