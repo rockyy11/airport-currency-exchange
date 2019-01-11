@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import DisplayCurrencies from '../components/home/DisplayCurrencies'
 import DisplayBaseCurrencyDetails from '../components/home/DisplayBaseCurrencyDetails'
+import Loader from '../components/wrappers/Loader'
 import { currenciesListRequest } from '../actions/currency/CurrenciesList'
 
 class HomeContainer extends React.Component {
@@ -23,6 +24,7 @@ class HomeContainer extends React.Component {
             />
           </div>
         }
+        {isPending && <Loader />}
       </React.Fragment>
     )
   }
