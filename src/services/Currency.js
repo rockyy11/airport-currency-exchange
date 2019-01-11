@@ -28,7 +28,7 @@ const currencyAPIHelper = {
       let newRate = response.quotes[`${baseCurrency}${key}`]
       const actualRate = oldCurrenciesList && oldCurrenciesList[key].actualRate
       if (newRate === actualRate) {
-        newRate = oldCurrenciesList[key].rate * 1.01
+        newRate = oldCurrenciesList[key].rate * (1 + (process.env.REACT_APP_STOCHASTIC_RATE_PERCENTAGE / 100))
       }
       CurrenciesListData[key].rate = newRate
       CurrenciesListData[key].actualRate = newRate

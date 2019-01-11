@@ -34,7 +34,7 @@ describe('Currency Service Test', () => {
       keys.forEach((key) => {
         expect(response).toHaveProperty(key)
         if (isCurrencyKey(key, response)) {
-          const oldRate = currenciesList[key].rate * 1.01
+          const oldRate = currenciesList[key].rate * (1 + (process.env.REACT_APP_STOCHASTIC_RATE_PERCENTAGE / 100))
           const newRate = response[key].rate
           expect(oldRate).toEqual(newRate)
         }

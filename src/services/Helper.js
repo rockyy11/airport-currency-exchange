@@ -6,7 +6,7 @@ const Helper = {
     const options = {
       uri: 'http://apilayer.net/api/live',
       qs: {
-        access_key: 'c83929b29e310b821396a86e37c10fcd',
+        access_key: process.env.REACT_APP_CURREX_API_KEY,
         currencies: currencies,
         format: 1
       },
