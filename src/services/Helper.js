@@ -1,7 +1,7 @@
 import rp from 'request-promise'
 
 const Helper = {
-  async fetchRates (currencies) {
+  async fetchRates(currencies) {
     let response
     const options = {
       uri: 'http://apilayer.net/api/live',
@@ -17,7 +17,7 @@ const Helper = {
     }
     try {
       const data = await rp(options)
-      response = [data]
+      response = (data && data.error) ? [undefined, data.error.info] : response = [data]
     } catch (err) {
       response = [undefined, err]
       console.error('Error API fetching the new currencies rates', err)

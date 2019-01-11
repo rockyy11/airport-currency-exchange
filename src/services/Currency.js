@@ -22,7 +22,7 @@ const currencyAPIHelper = {
     const [response, err] = await Helper.fetchRates(currencies)
     if (err && isEmptyList) {
       console.error('Error while fetching the new currencies rates', err)
-      throw 'Error fetching the API rates. Please try Again !!'
+      throw err || 'Error fetching the API rates. Please try Again !!'
     }
     filteredKeys.forEach((key) => {
       const apiRate = response && response.quotes[`${baseCurrency}${key}`]
@@ -41,11 +41,11 @@ const currencyAPIHelper = {
     const { type, totalAmount, buy } = data
     const baseCurrency = currenciesList.baseCurrency
     if (type === currenciesList.baseCurrency) {
-      throw new Error('You can\'t buy base currency!!')
+      throw 'You can\'t buy base currency!!'
     }
     const remainingBaseAmount = currenciesList[baseCurrency].amount - totalAmount
     if (remainingBaseAmount < 0) {
-      throw new Error('You don\'t have enough balance to buy the amount!!')
+      throw 'You don\'t have enough balance to buy the amount!!'
     }
     currenciesList[baseCurrency].amount = remainingBaseAmount
     currenciesList[type].amount = currenciesList[type].amount + buy
@@ -55,12 +55,12 @@ const currencyAPIHelper = {
     const { type, totalAmount, sell } = data
     const baseCurrency = currenciesList.baseCurrency
     if (type === currenciesList.baseCurrency) {
-      throw new Error('You can\'t sell base currency!!')
+      throw 'You can\'t sell base currency!!'
     }
     currenciesList[baseCurrency].amount = currenciesList[baseCurrency].amount + sell
     currenciesList[type].amount = currenciesList[type].amount - totalAmount
     if (currenciesList[type].amount < 0) {
-      throw new Error('You don\'t have enough balance to sell the amount!!')
+      throw 'You don\'t have enough balance to sell the amount!!'
     }
     return currenciesList
   }
