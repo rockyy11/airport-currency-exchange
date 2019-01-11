@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
@@ -83,7 +82,7 @@ class DialogWrapper extends React.Component {
 
   render() {
     const { commission, inputAmount, subTotal } = this.state
-    const { open, onClose, dialogType, buyRate, sellRate, currency } = this.props
+    const { open, onClose, dialogType, currency } = this.props
     return (
       <Dialog
         className={'customDialog'}
