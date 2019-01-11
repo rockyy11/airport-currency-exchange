@@ -23,7 +23,7 @@ class DisplayCurrencyDetails extends React.Component {
   }
 
   render() {
-    const { currency, buy, sell, amount, settings } = this.props;
+    const { currency, label, buy, sell, amount, settings } = this.props;
     const sellAmount = sell * (1 + (settings.rateMargin / 100))
 
     return (
@@ -37,7 +37,7 @@ class DisplayCurrencyDetails extends React.Component {
           open={this.state.openDialog}
           onClose={this.closeDialog} />
         <TableRow hover={true} >
-          <TableCell className={'tableRow'}>{currency}</TableCell>
+          <TableCell className={'tableRow'} title={label}>{currency}</TableCell>
           <TableCell
             align='right'
             className={'tableRow'}

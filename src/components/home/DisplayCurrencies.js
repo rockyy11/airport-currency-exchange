@@ -11,7 +11,7 @@ import DisplayCurrencyDetails from './DisplayCurrencyDetails'
 import Helper from '../helper'
 
 class DisplayCurrencies extends React.Component {
-  displayCurrencyDetails () {
+  displayCurrencyDetails() {
     const { currenciesList, skip, settings } = this.props
     const configurationSettings = _.isEmpty(settings) ? DefaultConfigurationSettings : settings
 
@@ -21,6 +21,7 @@ class DisplayCurrencies extends React.Component {
         .map((key) => (
           <DisplayCurrencyDetails
             key={key}
+            label={currenciesList[key].label}
             currency={key}
             settings={configurationSettings}
             buy={Helper.fixRate(currenciesList[key].rate)}
@@ -31,7 +32,7 @@ class DisplayCurrencies extends React.Component {
     )
   }
 
-  render () {
+  render() {
     return (
       <React.Fragment>
         <Paper className={'container paperRootStyle'}>
