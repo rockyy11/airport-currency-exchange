@@ -42,13 +42,13 @@ class DisplayCurrencyDetails extends React.Component {
             align='right'
             className={'tableRow'}
             onClick={this.onBuyCellClick}>
-            {buy}
+            {helper.fixRate(1 / buy)}
           </TableCell>
           <TableCell
             align='right'
             className={'tableRow'}
             onClick={this.onSellCellClick}>
-            {helper.fixRate(sellAmount)}
+            {helper.fixRate(1 / sellAmount)}
           </TableCell>
           <TableCell
             align='right'

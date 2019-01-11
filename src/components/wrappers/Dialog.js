@@ -24,7 +24,7 @@ class DialogWrapper extends React.Component {
   calculateCommision(props, inputAmount) {
     const { settings: configurationSettings } = props
     const { commission, surcharge, minimalCommission } = configurationSettings
-    const newCommission = Math.max((this.getSubTotal(props, inputAmount) * (commission / 100) + surcharge), minimalCommission)
+    const newCommission = Math.max(((this.getSubTotal(props, inputAmount) * (commission / 100)) + surcharge), minimalCommission)
     return newCommission
   }
 
@@ -42,6 +42,7 @@ class DialogWrapper extends React.Component {
     } else {
       sellCurrency({ type: currency, totalAmount: total, sell: inputAmount })
     }
+    this.props.onClose()
   }
 
   getTotal() {
@@ -71,7 +72,10 @@ class DialogWrapper extends React.Component {
     const { buyRate: oldBuyRate, sellRate: oldSellRate } = this.props
     if (oldBuyRate !== newBuyRate || oldSellRate !== newSellRate) {
       const subTotal = this.getSubTotal(nextProps, this.state.inputAmount)
-      this.setState({ subTotal })
+      this.setState({
+        subTotal,
+        commission: this.calculateCommision(nextProps, this.state.inputAmount)
+      })
     }
   }
 

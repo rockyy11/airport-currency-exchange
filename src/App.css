@@ -159,7 +159,7 @@
   width: 100%;
 }
 
-.warning {
+.customTd .warning {
   color: red !important;
   font-weight: 1000 !important;
 }

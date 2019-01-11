@@ -4,7 +4,7 @@ import ListData from '../data/CurrenciesList'
 import Helper from './Helper'
 
 const currencyAPIHelper = {
-  async getCurrenciesList(oldCurrenciesList) {
+  async getCurrenciesList (oldCurrenciesList) {
     let CurrenciesListData
     const isEmptyList = _.isEmpty(oldCurrenciesList)
     if (isEmptyList) {
@@ -37,7 +37,7 @@ const currencyAPIHelper = {
     CurrenciesListData.updatedRateTime = moment().format('YYYY/MM/DD h:mm:ss')
     return CurrenciesListData
   },
-  async buyCurrency(data, currenciesList) {
+  async buyCurrency (data, currenciesList) {
     const { type, totalAmount, buy } = data
     const baseCurrency = currenciesList.baseCurrency
     if (type === currenciesList.baseCurrency) {
@@ -53,15 +53,15 @@ const currencyAPIHelper = {
     currenciesList[type].amount = currenciesList[type].amount + buy
     return currenciesList
   },
-  async sellCurrency(data, currenciesList) {
+  async sellCurrency (data, currenciesList) {
     const { type, totalAmount, sell } = data
     const baseCurrency = currenciesList.baseCurrency
     if (type === currenciesList.baseCurrency) {
       // eslint-disable-next-line
       throw 'You can\'t sell base currency!!'
     }
-    currenciesList[baseCurrency].amount = currenciesList[baseCurrency].amount + sell
-    currenciesList[type].amount = currenciesList[type].amount - totalAmount
+    currenciesList[baseCurrency].amount = currenciesList[baseCurrency].amount + totalAmount
+    currenciesList[type].amount = currenciesList[type].amount - sell
     if (currenciesList[type].amount < 0) {
       // eslint-disable-next-line
       throw 'You don\'t have enough balance to sell the amount!!'
