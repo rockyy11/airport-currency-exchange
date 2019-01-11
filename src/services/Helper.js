@@ -1,7 +1,7 @@
 import rp from 'request-promise'
 
 const Helper = {
-  async fetchRates(currencies) {
+  async fetchRates (currencies) {
     let response
     const options = {
       uri: 'http://apilayer.net/api/live',
