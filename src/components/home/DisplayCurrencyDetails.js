@@ -23,13 +23,15 @@ class DisplayCurrencyDetails extends React.Component {
   }
 
   render() {
-    const { currency, buy, sell, amount } = this.props;
+    const { currency, buy, sell, amount, settings } = this.props;
+    const sellAmount = sell * (1 + (settings.rateMargin / 100))
 
     return (
       <React.Fragment>
         <DialogWrapper
           dialogType={this.state.dialogType}
           buyRate={buy}
+          settings={settings}
           sellRate={sell}
           currency={currency}
           open={this.state.openDialog}
@@ -46,7 +48,7 @@ class DisplayCurrencyDetails extends React.Component {
             align='right'
             className={'tableRow'}
             onClick={this.onSellCellClick}>
-            {sell}
+            {helper.fixRate(sellAmount)}
           </TableCell>
           <TableCell
             align='right'

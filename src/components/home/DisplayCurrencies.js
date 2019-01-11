@@ -1,4 +1,6 @@
 import React from 'react'
+import _ from 'lodash'
+import DefaultConfigurationSettings from '../../data/AdminConfiguration'
 import Table from '@material-ui/core/Table'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
@@ -10,7 +12,8 @@ import Helper from '../helper'
 
 class DisplayCurrencies extends React.Component {
   displayCurrencyDetails () {
-    const { currenciesList, skip } = this.props
+    const { currenciesList, skip, settings } = this.props
+    const configurationSettings = _.isEmpty(settings) ? DefaultConfigurationSettings : settings
 
     return (
       Object.keys(currenciesList)
@@ -19,6 +22,7 @@ class DisplayCurrencies extends React.Component {
           <DisplayCurrencyDetails
             key={key}
             currency={key}
+            settings={configurationSettings}
             buy={Helper.fixRate(currenciesList[key].rate)}
             sell={Helper.fixRate(currenciesList[key].rate)}
             amount={currenciesList[key].amount}

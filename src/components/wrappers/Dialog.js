@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import DefaultSettingsData from '../../data/AdminConfiguration'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { buyCurrencyRequest } from '../../actions/currency/BuyCurrency'
@@ -25,15 +23,14 @@ class DialogWrapper extends React.Component {
   }
 
   calculateCommision(props, inputAmount) {
-    const { settings } = props.settingsStates
-    const configurationSettings = _.isEmpty(settings) ? DefaultSettingsData : settings
+    const { settings: configurationSettings } = props
     const { commission, surcharge, minimalCommission } = configurationSettings
     const newCommission = Math.max((this.getSubTotal(props, inputAmount) * (commission / 100) + surcharge), minimalCommission)
     return newCommission
   }
 
   getSubTotal(props, inputAmount) {
-    const { buyRate, sellRate } = props    
+    const { buyRate, sellRate } = props
     return inputAmount / (this.isTypeBuy() ? buyRate : sellRate)
   }
 
@@ -70,7 +67,7 @@ class DialogWrapper extends React.Component {
     });
   }
 
-  componentWillReceiveProps(nextProps, nextStates) {
+  componentWillReceiveProps(nextProps) {
     const { buyRate: newBuyRate, sellRate: newSellRate } = nextProps
     const { buyRate: oldBuyRate, sellRate: oldSellRate } = this.props
     if (oldBuyRate !== newBuyRate || oldSellRate !== newSellRate) {
@@ -161,11 +158,9 @@ class DialogWrapper extends React.Component {
   }
 }
 
-const mapStateToProps = ({ settings }) => ({ settingsStates: settings })
-
 const mapDispatchToProps = (dispatch) => ({
   buyCurrency: (data) => dispatch(buyCurrencyRequest(data)),
   sellCurrency: (data) => dispatch(sellCurrencyRequest(data))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DialogWrapper)
+export default connect(null, mapDispatchToProps)(DialogWrapper)
